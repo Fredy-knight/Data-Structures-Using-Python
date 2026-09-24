@@ -1,17 +1,51 @@
 import heapq
+
 jobs = []
-heapq.heappush(jobs,(-3,"Job A"))
-heapq.heappush(jobs,(-5,"Job B"))
-heapq.heappush(jobs,(-1,"Job C"))
-heapq.heappush(jobs,(-4,"Job D"))
-print("Jobs in heap order")
-for priority, job in jobs:
-    print("Processing : ",job,"Priority : ", -priority)
-print("\nHighest priority job : ",jobs[0][1])
-print("Priority : ", -jobs[0][0])
-priority,job = heapq.heappop(jobs)
-print("\nProcessed job : ",job)
-print("Priority : ", -priority)
-print("\nRemaining jobs : ")
-for priority, job in jobs:
-    print(job,"Priority : ", -priority)
+
+while True:
+    print("\n--- Priority Queue Menu ---")
+    print("1. Insert")
+    print("2. Delete")
+    print("3. Peek")
+    print("4. Display")
+    print("5. Exit")
+
+    choice = int(input("Enter your choice: "))
+
+    if choice == 1:
+        job = input("Enter job name: ")
+        priority = int(input("Enter priority: "))
+
+        heapq.heappush(jobs, (-priority, job))
+        print("Job inserted successfully.")
+
+    elif choice == 2:
+        if len(jobs) == 0:
+            print("No jobs available.")
+        else:
+            priority, job = heapq.heappop(jobs)
+            print("\nDeleted job:", job)
+            print("Priority:", -priority)
+
+    elif choice == 3:
+        if len(jobs) == 0:
+            print("No jobs available.")
+        else:
+            priority, job = jobs[0]
+            print("\nHighest priority job:", job)
+            print("Priority:", -priority)
+
+    elif choice == 4:
+        if len(jobs) == 0:
+            print("No jobs available.")
+        else:
+            print("\nJobs in heap order:")
+            for priority, job in jobs:
+                print("Job:", job, "Priority:", -priority)
+
+    elif choice == 5:
+        print("Program ended.")
+        break
+
+    else:
+        print("Invalid choice. Please try again.")
